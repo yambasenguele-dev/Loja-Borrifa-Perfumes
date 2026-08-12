@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <!-- ========================================== -->
+    <!-- META TAGS SEO E PROTEÇÃO                   -->
+    <!-- ========================================== -->
+    <title>
+      Borrifa Perfumes | Perfumaria Exclusiva em Luanda | Fragrâncias
+      Sofisticadas Angola
+    </title>
+    <meta
+      name="description"
+      content="Borrifa Perfumes - Perfumaria exclusiva em Luanda com fragrâncias sofisticadas e perfumes de autor em Angola. Presentes de luxo, atendimento personalizado e entrega em Luanda. Deixe a sua marca no ar."
+    />
+    <meta
+      name="keywords"
+      content="perfumaria Luanda, perfumes importados Angola, Borrifa Perfumes, fragrâncias sofisticadas, comprar perfume Luanda, presentes de luxo Angola, perfumes de autor"
+    />
+    <meta name="author" content="Borrifa Perfumes" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://borrifaperfumes.vercel.app/" />
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://borrifaperfumes.vercel.app/" />
+    <meta
+      property="og:title"
+      content="Borrifa Perfumes | Fragrâncias Sofisticadas em Luanda"
+    />
+    <meta
+      property="og:description"
+      content="A exclusividade que você procura está em cada detalhe da nossa coleção. Deixe a sua marca no ar."
+    />
+    <meta
+      property="og:image"
+      content="https://borrifaperfumes.vercel.app/logo.jpeg"
+    />
+    <meta property="og:locale" content="pt_PT" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Borrifa Perfumes | Fragrâncias Sofisticadas em Luanda"
+    />
+    <meta
+      name="twitter:description"
+      content="A exclusividade que você procura está em cada detalhe da nossa coleção. Deixe a sua marca no ar."
+    />
+    <meta
+      name="twitter:image"
+      content="https://borrifaperfumes.vercel.app/logo.jpeg"
+    />
+
+    <!-- Favicon (Ícone do Site) - SVG Inline para não precisar de ficheiro extra -->
+    <link rel="icon" type="image/jpeg" href="./img/logo.jpeg" />
+    <meta name="theme-color" content="#F8F4EF" />
+
+    <!-- Dados Estruturados (JSON-LD) para Google -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "Borrifa Perfumes",
+        "description": "Perfumaria exclusiva em Luanda com fragrâncias sofisticadas e perfumes de autor.",
+        "image": "https://borrifaperfumes.vercel.app/logo.jpeg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Luanda",
+          "addressCountry": "AO"
+        },
+        "telephone": "+244943091218",
+        "url": "https://borrifaperfumes.vercel.app"
+      }
+    </script>
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&family=Montserrat:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <link rel="stylesheet" href="estilos.css" />
+  </head>
+  <body>
+    <div class="barra-progresso" id="barraProgresso"></div>
+
+    <header class="cabecalho" id="cabecalho">
+      <div class="recipiente">
+        <div class="cabecalho-interior">
+          <div class="logo-marca" onclick="rolarParaSecao('heroi')">
+            <img
+              src="./img/logo.jpeg"
+              alt="Logotipo Borrifa Perfumes"
+              class="logo-imagem"
+            />
+          </div>
+          <nav class="navegacao-menu">
+            <ul class="lista-menu">
+              <li><a href="#essencia">Essência</a></li>
+              <li><a href="#catalogo">Coleção</a></li>
+              <li><a href="#avaliacoes">Avaliações</a></li>
+              <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <a
+              href="https://wa.me/244943091218"
+              class="botao botao-primario"
+              target="_blank"
+              rel="noopener"
+              >Fale Connosco</a
+            >
+            <button
+              class="botao-menu-mobile"
+              id="botaoMenuMobile"
+              aria-label="Abrir menu"
+            >
+              <span></span><span></span><span></span>
+            </button>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <div class="menu-mobile-overlay" id="menuMobileOverlay">
+      <button
+        class="botao-fechar-menu"
+        id="botaoFecharMenu"
+        aria-label="Fechar menu"
+      >
+        &times;
+      </button>
+      <ul>
+        <li><a href="#essencia">Essência</a></li>
+        <li><a href="#catalogo">Coleção</a></li>
+        <li><a href="#avaliacoes">Avaliações</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a
+        href="https://wa.me/244943091218"
+        class="botao botao-whatsapp"
+        target="_blank"
+        rel="noopener"
+        >Fale no WhatsApp</a
+      >
+    </div>
+
+    <main>
+      <section class="seccao-heroi" id="heroi">
+        <div class="slide-fundo slide-1 ativo"></div>
+        <div class="slide-fundo slide-2"></div>
+        <div class="slide-fundo slide-3"></div>
+        <div class="slide-fundo slide-4"></div>
+
+        <div class="heroi-conteudo">
+          <div class="heroi-ornamento-topo">
+            <div class="linha"></div>
+            <div class="texto">Borrifa Perfumes • Luanda</div>
+            <div class="linha"></div>
+          </div>
+          <h1 class="heroi-titulo">
+            Deixe a sua marca <span class="destaque-dourado">no ar.</span>
+          </h1>
+          <p class="heroi-subtitulo">
+            Coleção Exclusiva de Fragrâncias Sofisticadas
+          </p>
+          <p class="heroi-descricao">
+            A exclusividade que procura está em cada detalhe da nossa coleção.
+            Do clássico ao moderno, temos o aroma que combina com a sua
+            personalidade.
+          </p>
+          <div class="heroi-botoes">
+            <a
+              href="https://wa.me/244943091218"
+              class="botao botao-whatsapp"
+              target="_blank"
+              rel="noopener"
+              >Fale no WhatsApp</a
+            >
+            <a href="#catalogo" class="botao botao-secundario"
+              >Explorar Coleção</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section class="seccao-essencia" id="essencia">
+        <div class="recipiente">
+          <div class="essencia-conteudo">
+            <div class="essencia-imagem revelar-esquerda">
+              <div class="moldura">
+                <svg
+                  class="frasco-essencia"
+                  viewBox="0 0 200 280"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Frasco de Perfume Borrifa"
+                >
+                  <defs>
+                    <linearGradient
+                      id="gradFrasco"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop
+                        offset="0%"
+                        stop-color="#C8A45A"
+                        stop-opacity="0.9"
+                      />
+                      <stop
+                        offset="100%"
+                        stop-color="#A6853E"
+                        stop-opacity="0.95"
+                      />
+                    </linearGradient>
+                  </defs>
+                  <rect
+                    x="80"
+                    y="10"
+                    width="40"
+                    height="35"
+                    fill="url(#gradFrasco)"
+                    rx="2"
+                  />
+                  <rect
+                    x="75"
+                    y="40"
+                    width="50"
+                    height="8"
+                    fill="#A6853E"
+                    rx="2"
+                  />
+                  <path
+                    d="M 60 60 L 140 60 L 145 80 L 145 250 Q 145 265 130 265 L 70 265 Q 55 265 55 250 L 55 80 Z"
+                    fill="url(#gradFrasco)"
+                    stroke="#A6853E"
+                    stroke-width="1"
+                  />
+                  <rect
+                    x="75"
+                    y="150"
+                    width="50"
+                    height="60"
+                    fill="#FEFCFA"
+                    opacity="0.9"
+                    rx="2"
+                  />
+                  <text
+                    x="100"
+                    y="180"
+                    text-anchor="middle"
+                    font-family="serif"
+                    font-size="12"
+                    fill="#5A3E2B"
+                    font-style="italic"
+                  >
+                    BORRIFA
+                  </text>
+                </svg>
+              </div>
+            </div>
+            <div class="essencia-texto revelar-direita">
+              <p class="subtitulo-seccao">A Nossa Essência</p>
+              <h2 class="titulo-seccao">Onde a memória encontra o aroma</h2>
+              <div class="linha-dourada" style="margin: 24px 0"></div>
+              <p class="paragrafo">
+                Na Borrifa Perfumes, acreditamos que uma fragrância é mais do
+                que um perfume — é uma assinatura, uma presença, uma memória que
+                permanece.
+              </p>
+              <blockquote class="essencia-citacao">
+                A exclusividade que você procura está em cada detalhe da nossa
+                coleção.
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccao-catalogo" id="catalogo">
+        <div class="recipiente">
+          <div class="catalogo-cabecalho">
+            <p class="subtitulo-seccao">A nossa coleção</p>
+            <h2 class="titulo-seccao">Catálogo de Fragrâncias</h2>
+            <div class="linha-dourada"></div>
+          </div>
+          <div class="filtros-catalogo" id="filtrosCatalogo">
+            <button class="filtro-botao ativo" data-familia="todos">
+              Todos
+            </button>
+          </div>
+          <div class="grelha-fragrancias" id="grelhaFragrancias">
+            <div class="loader">A carregar fragrâncias...</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="seccao-avaliacoes" id="avaliacoes">
+        <div class="recipiente">
+          <div class="catalogo-cabecalho">
+            <p class="subtitulo-seccao">Testemunhos</p>
+            <h2 class="titulo-seccao">O Que Dizem os Nossos Clientes</h2>
+          </div>
+        </div>
+        <div class="carrossel-avaliacoes">
+          <div class="carrossel-track" id="carrosselTrack"></div>
+        </div>
+      </section>
+
+      <section class="seccao-contacto" id="contacto">
+        <div class="recipiente">
+          <div class="contacto-conteudo">
+            <div class="contacto-texto revelar-esquerda">
+              <p class="subtitulo-seccao">Estamos para si</p>
+              <h2 class="titulo-seccao">Fale Connosco</h2>
+              <ul class="contacto-informacoes">
+                <li>
+                  <div class="icon">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                    >
+                      <path
+                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="rotulo">WhatsApp</div>
+                    <div class="valor">+244 943 091 218</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="contacto-cartao revelar-direita">
+              <div class="icon-whatsapp">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                  />
+                </svg>
+              </div>
+              <h3>Fale Connosco Agora</h3>
+              <a
+                href="https://wa.me/244943091218"
+                class="botao botao-whatsapp"
+                target="_blank"
+                rel="noopener"
+                >Iniciar Conversa</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <div class="recipiente">
+        <div class="rodape-base">
+          <p>
+            © 2026 Borrifa Perfumes. Todos os direitos reservados. | Luanda,
+            Angola
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <a
+      href="https://wa.me/244943091218"
+      class="botao-flutuante-whatsapp"
+      target="_blank"
+      rel="noopener"
+      aria-label="Falar no WhatsApp"
+    >
+      <svg viewBox="0 0 24 24">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+        />
+      </svg>
+    </a>
+
+    <script src="script.js"></script>
+  </body>
+</html>
