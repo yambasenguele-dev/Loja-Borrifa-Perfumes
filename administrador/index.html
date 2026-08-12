@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <!-- PROTEÇÃO: Impede que o Google indexe esta página -->
+    <title>Painel Administrativo - Borrifa Perfumes</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+      :root {
+        --dourado: #c8a45a;
+        --marrom: #5a3e2b;
+        --fundo: #f8f4ef;
+        --vermelho: #a32b2b;
+      }
+      body {
+        font-family: "Jost", sans-serif;
+        background: #f0f2f5;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      h1,
+      h2 {
+        font-family: "Cormorant Garamond", serif;
+        color: var(--marrom);
+      }
+      h1 {
+        border-bottom: 2px solid var(--dourado);
+        padding-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 2rem;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group.full {
+        grid-column: 1 / -1;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--marrom);
+      }
+      input[type="text"],
+      input[type="password"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-family: inherit;
+        font-size: 14px;
+      }
+      button {
+        background: var(--dourado);
+        color: #fff;
+        border: none;
+        padding: 12px 24px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-weight: 500;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+      button:hover {
+        background: #a6853e;
+      }
+      button.danger {
+        background: var(--vermelho);
+      }
+      button.danger:hover {
+        background: #8a2424;
+      }
+      button.secondary {
+        background: #ccc;
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 30px;
+      }
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background: var(--fundo);
+        color: var(--marrom);
+        font-weight: 600;
+      }
+      img.thumb {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      .login-box {
+        max-width: 400px;
+        margin: 80px auto;
+        text-align: center;
+        padding: 40px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .hidden {
+        display: none;
+      }
+      .logout-btn {
+        background: var(--marrom);
+        font-size: 12px;
+        padding: 8px 16px;
+      }
+      .file-upload {
+        border: 2px dashed #ccc;
+        padding: 20px;
+        text-align: center;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .file-upload:hover {
+        border-color: var(--dourado);
+        background: var(--fundo);
+      }
+      .preview-img {
+        max-width: 100px;
+        max-height: 100px;
+        margin-top: 10px;
+        border-radius: 4px;
+      }
+      @media (max-width: 768px) {
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+        .container {
+          padding: 20px;
+        }
+        h1 {
+          font-size: 1.5rem;
+          flex-direction: column;
+          gap: 10px;
+          align-items: flex-start;
+        }
+        table {
+          font-size: 12px;
+        }
+        th,
+        td {
+          padding: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="loginArea" class="login-box">
+        <h2>Acesso Restrito</h2>
+        <p style="margin-bottom: 20px; color: #666">
+          Faça login para gerir os produtos.
+        </p>
+        <div class="form-group" style="text-align: left">
+          <label>Email</label>
+          <input type="text" id="emailLogin" placeholder="admin@borrifa.com" />
+        </div>
+        <div class="form-group" style="text-align: left">
+          <label>Password</label>
+          <input type="password" id="passLogin" placeholder="••••••••" />
+        </div>
+        <button onclick="fazerLogin()" style="width: 100%">Entrar</button>
+        <p
+          id="erroLogin"
+          style="color: var(--vermelho); margin-top: 15px; font-size: 14px"
+        ></p>
+      </div>
+
+      <div id="dashboardArea" class="hidden">
+        <h1>
+          Painel de Produtos
+          <button class="logout-btn" onclick="fazerLogout()">
+            Terminar Sessão
+          </button>
+        </h1>
+
+        <h2 id="formTitulo">Adicionar Novo Produto</h2>
+        <input type="hidden" id="produtoId" />
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Nome do Perfume *</label>
+            <input type="text" id="nomeProduto" placeholder="Ex: Oud Wood" />
+          </div>
+          <div class="form-group">
+            <label>Família Olfativa *</label>
+            <input
+              type="text"
+              id="familiaProduto"
+              placeholder="Ex: amadeirado, floral, oriental"
+            />
+          </div>
+          <div class="form-group full">
+            <label>Descrição Sensorial</label>
+            <textarea
+              id="descProduto"
+              rows="3"
+              placeholder="Notas de cabeça, coração, etc."
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label>Tamanho</label>
+            <input type="text" id="tamanhoProduto" placeholder="Ex: 100ml" />
+          </div>
+          <div class="form-group">
+            <label>Preço</label>
+            <input type="text" id="precoProduto" placeholder="Ex: KZ 15.000" />
+          </div>
+          <div class="form-group full">
+            <label>Imagem do Produto</label>
+            <div
+              class="file-upload"
+              onclick="document.getElementById('fileInput').click()"
+            >
+              <p>Clique para selecionar uma imagem do seu dispositivo</p>
+              <input
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                style="display: none"
+                onchange="uploadImagem(event)"
+              />
+              <img id="previewImagem" class="preview-img hidden" src="" />
+              <p
+                id="uploadStatus"
+                style="font-size: 12px; color: #666; margin-top: 5px"
+              ></p>
+            </div>
+            <input type="hidden" id="imgProdutoUrl" />
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; display: flex; gap: 10px">
+          <button onclick="salvarProduto()">Salvar Produto</button>
+          <button onclick="limparForm()" class="secondary">
+            Limpar Formulário
+          </button>
+        </div>
+
+        <h2 style="margin-top: 40px">Produtos Cadastrados</h2>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Imagem</th>
+                <th>Nome</th>
+                <th>Família</th>
+                <th>Preço</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaProdutos"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const SUPABASE_URL = "https://zghlywrgykhypttyripv.supabase.co";
+      const SUPABASE_KEY = "sb_publishable_B6fAbPQTmh2YfcrneDOMNw_3M1cu7o8";
+      const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        const {
+          data: { session },
+        } = await db.auth.getSession();
+        if (session) mostrarDashboard();
+      });
+
+      async function fazerLogin() {
+        const email = document.getElementById("emailLogin").value;
+        const pass = document.getElementById("passLogin").value;
+        const erroMsg = document.getElementById("erroLogin");
+
+        const { data, error } = await db.auth.signInWithPassword({
+          email,
+          password: pass,
+        });
+        if (error) {
+          erroMsg.innerText = "Email ou password incorretos.";
+          return;
+        }
+        mostrarDashboard();
+      }
+
+      async function fazerLogout() {
+        await db.auth.signOut();
+        document.getElementById("loginArea").classList.remove("hidden");
+        document.getElementById("dashboardArea").classList.add("hidden");
+      }
+
+      async function mostrarDashboard() {
+        document.getElementById("loginArea").classList.add("hidden");
+        document.getElementById("dashboardArea").classList.remove("hidden");
+        await carregarTabelaAdmin();
+      }
+
+      async function uploadImagem(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const preview = document.getElementById("previewImagem");
+        const status = document.getElementById("uploadStatus");
+        const inputUrl = document.getElementById("imgProdutoUrl");
+
+        preview.src = URL.createObjectURL(file);
+        preview.classList.remove("hidden");
+        status.innerText = "A enviar imagem...";
+
+        const fileName = `${Date.now()}_${file.name.replace(/\s/g, "_")}`;
+        const { data, error } = await db.storage
+          .from("produtos-imagens")
+          .upload(fileName, file);
+
+        if (error) {
+          status.innerText = "Erro ao enviar imagem.";
+          console.error(error);
+          return;
+        }
+
+        const { data: urlData } = db.storage
+          .from("produtos-imagens")
+          .getPublicUrl(fileName);
+        inputUrl.value = urlData.publicUrl;
+        status.innerText = "Imagem enviada com sucesso!";
+        status.style.color = "green";
+      }
+
+      async function carregarTabelaAdmin() {
+        const tbody = document.getElementById("tabelaProdutos");
+        tbody.innerHTML = '<tr><td colspan="5">A carregar...</td></tr>';
+        const { data: produtos, error } = await db
+          .from("produtos")
+          .select("*")
+          .order("criado_em", { ascending: false });
+        if (error) {
+          alert("Erro ao carregar produtos");
+          return;
+        }
+
+        tbody.innerHTML = "";
+        produtos.forEach((p) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+                <td><img src="${p.imagem_url || "https://via.placeholder.com/60"}" class="thumb"></td>
+                <td>${p.nome}</td>
+                <td>${p.familia}</td>
+                <td>${p.preco}</td>
+                <td>
+                    <button onclick="editarProduto(${p.id})" style="background: #1E3A5F; padding: 6px 12px; font-size: 12px;">Editar</button>
+                    <button onclick="apagarProduto(${p.id})" class="danger" style="padding: 6px 12px; font-size: 12px;">Apagar</button>
+                </td>
+            `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      async function salvarProduto() {
+        const id = document.getElementById("produtoId").value;
+        const dados = {
+          nome: document.getElementById("nomeProduto").value,
+          familia: document.getElementById("familiaProduto").value,
+          descricao: document.getElementById("descProduto").value,
+          tamanho: document.getElementById("tamanhoProduto").value,
+          preco: document.getElementById("precoProduto").value,
+          imagem_url: document.getElementById("imgProdutoUrl").value,
+        };
+
+        if (!dados.nome || !dados.familia) {
+          alert("Nome e Família são obrigatórios!");
+          return;
+        }
+
+        if (id) {
+          const { error } = await db
+            .from("produtos")
+            .update(dados)
+            .eq("id", id);
+          if (error) {
+            alert("Erro ao atualizar");
+          } else {
+            alert("Produto atualizado!");
+          }
+        } else {
+          const { error } = await db.from("produtos").insert([dados]);
+          if (error) {
+            alert("Erro ao adicionar");
+          } else {
+            alert("Produto adicionado!");
+          }
+        }
+        limparForm();
+        carregarTabelaAdmin();
+      }
+
+      async function editarProduto(id) {
+        const { data: p, error } = await db
+          .from("produtos")
+          .select("*")
+          .eq("id", id)
+          .single();
+        if (error) {
+          alert("Erro ao buscar produto");
+          return;
+        }
+
+        document.getElementById("formTitulo").innerText = "Editar Produto";
+        document.getElementById("produtoId").value = p.id;
+        document.getElementById("nomeProduto").value = p.nome;
+        document.getElementById("familiaProduto").value = p.familia;
+        document.getElementById("descProduto").value = p.descricao || "";
+        document.getElementById("tamanhoProduto").value = p.tamanho || "";
+        document.getElementById("precoProduto").value = p.preco || "";
+        document.getElementById("imgProdutoUrl").value = p.imagem_url || "";
+
+        if (p.imagem_url) {
+          document.getElementById("previewImagem").src = p.imagem_url;
+          document.getElementById("previewImagem").classList.remove("hidden");
+          document.getElementById("uploadStatus").innerText =
+            "Imagem atual carregada.";
+        }
+
+        window.scrollTo(0, 0);
+      }
+
+      async function apagarProduto(id) {
+        if (!confirm("Tem a certeza que deseja apagar este produto?")) return;
+        const { error } = await db.from("produtos").delete().eq("id", id);
+        if (error) {
+          alert("Erro ao apagar");
+        } else {
+          alert("Produto apagado!");
+          carregarTabelaAdmin();
+        }
+      }
+
+      function limparForm() {
+        document.getElementById("formTitulo").innerText =
+          "Adicionar Novo Produto";
+        document.getElementById("produtoId").value = "";
+        document.getElementById("nomeProduto").value = "";
+        document.getElementById("familiaProduto").value = "";
+        document.getElementById("descProduto").value = "";
+        document.getElementById("tamanhoProduto").value = "";
+        document.getElementById("precoProduto").value = "";
+        document.getElementById("imgProdutoUrl").value = "";
+        document.getElementById("fileInput").value = "";
+        document.getElementById("previewImagem").classList.add("hidden");
+        document.getElementById("uploadStatus").innerText = "";
+      }
+    </script>
+  </body>
+</html>
